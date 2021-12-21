@@ -65,7 +65,7 @@
          MUA shooting e sfilate
          P. I. 02740150020     Biella, BI" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="og:image" content="https://veronicacurro.000webhostapp.com/icon.jpg">
+      <meta property="og:image" content="https://veronicacurrobeautyconsultant.com/icon.jpg">
       <meta property="og:updated_time" content="2021-10-02T13:28:05.6677765Z" />
       <meta property="og:type" content="article" />
       <meta name="robots" content="nofollow" />
@@ -97,6 +97,12 @@
    </head>
    <body data-pid="450596504" data-iid="" style="line-height: normal;" class="layout5 isV5">
      <?php
+      use PHPMailer\PHPMailer\PHPMailer;
+      use PHPMailer\PHPMailer\SMTP;
+      use PHPMailer\PHPMailer\Exception;
+      require_once __DIR__ . '/vendor/phpmailer/src/Exception.php';
+      require_once __DIR__ . '/vendor/phpmailer/src/PHPMailer.php';
+      require_once __DIR__ . '/vendor/phpmailer/src/SMTP.php';
       if(isset($_POST["Name"]) and isset($_POST["Email"])){
         $name = $_POST["Name"];
         $email= $_POST["Email"];
@@ -115,12 +121,36 @@
         if($phone!=""){
           $body.="\n Numero di telefono:".$phone;
         }
-        mail(
-          "veronicacurro.beautyconsultant@gmail.com",
-          'Nuova richiesta di contatto',
-          $body,
-          "From: veronicacurr0"
-        );
+$mail = new PHPMailer(true);
+
+try {
+    // Server settings
+    //$mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
+
+    $mail->Username = 'noreply.veronicacurro@gmail.com'; // YOUR gmail email
+    $mail->Password = 'mNw2P52Q74Jw4KbP'; // YOUR gmail password
+
+    // Sender and recipient settings
+    $mail->setFrom('noreply.veronicacurro@gmail.com', 'noreply');
+    $mail->addAddress('veronicacurro.beautyconsultant@gmail.com', 'Receiver Name');
+    $mail->addReplyTo('noreply.veronicacurro@gmail.com', 'noreply'); // to set the reply to
+
+    // Setting the email content
+    $mail->IsHTML(true);
+    $mail->Subject = "Nuova richiesta di contatto";
+    $mail->Body = $body;
+    $mail->AltBody = $body;
+
+    $mail->send();
+    //echo "Email message sent.";
+} catch (Exception $e) {
+    //echo "Error in sending email. Mailer Error: {$mail->ErrorInfo}";
+}
         echo '<script type="text/javascript">alert("Grazie dell\'interesse, ti risponderò appena possibile!");</script>';
       }
      ?>
