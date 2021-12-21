@@ -133,7 +133,7 @@ try {
     $mail->Port = 587;
 
     $mail->Username = 'noreply.veronicacurro@gmail.com'; // YOUR gmail email
-    $mail->Password = 'mNw2P52Q74Jw4KbP'; // YOUR gmail password
+    $mail->Password = ''; // YOUR gmail password
 
     // Sender and recipient settings
     $mail->setFrom('noreply.veronicacurro@gmail.com', 'noreply');
