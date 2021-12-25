@@ -93,7 +93,7 @@
          MUA shooting e sfilate
          P. I. 02740150020     Biella, BI" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="og:image" content="https://veronicacurro.000webhostapp.com/icon.jpg">
+      <meta property="og:image" content="https://veronicacurrobeautyconsultant.com/icon.jpg">
       <meta property="og:updated_time" content="2021-10-02T13:28:05.6677765Z" />
       <meta property="og:type" content="article" />
       <meta name="robots" content="nofollow" />
@@ -125,7 +125,7 @@
    </head>
    <body data-pid="450596504" data-iid="" style="line-height: normal;" class="layout5 isV5">
 
-     
+
       <div class="container-fluid site-wrapper">
          <!-- this is the Sheet -->
          <div class="dynamicHeaderContainer HeaderType6 top-container">
