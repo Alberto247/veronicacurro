@@ -12,6 +12,34 @@
     c.parentNode.style.display="none";
   }
   setInterval(removeTag, 500);
+  function submitData() {
+                var name = document.getElementById("Name").value
+                var email = document.getElementById("Email").value
+                var phone = document.getElementById("Phone").value
+                var message = document.getElementById("Message").value
+                var b ="Nuova richiesta di contatto: <br> Nome: " + name + "<br> Email:" + email;
+                if(message!=""){
+                  b += "<br> Messaggio:" + message;
+                }
+                if(phone!=""){
+                  b += "<br> Numero di telefono:" + phone;
+                }
+                var json = { body: b};
+                $.ajax({
+                    type: "POST",
+                    url: "https://2oc8ao6xtc.execute-api.eu-west-1.amazonaws.com/veronicamail",
+                    data: JSON.stringify(json),
+                    beforeSend: function() {
+                        console.log("Before");
+                        $("#submit").attr('disabled', true);
+                    },
+                    success: function(response){
+                        console.log(response);
+                        $("#submit").attr('disabled', false);
+                    }
+                });
+                alert("Grazie dell\'interesse, ti risponderò appena possibile!");
+            }
 </script>
 <script async>
   setTimeout(function () {
@@ -96,34 +124,8 @@
       <script type="text/javascript" src="./static/jquery-1.10.2.min.js"></script>
    </head>
    <body data-pid="450596504" data-iid="" style="line-height: normal;" class="layout5 isV5">
-     <?php
-      if(isset($_POST["Name"]) and isset($_POST["Email"])){
-        $name = $_POST["Name"];
-        $email= $_POST["Email"];
-        $message="";
-        $phone="";
-        if(isset($_POST["Phone"])){
-          $phone=$_POST["Phone"];
-        }
-        if(isset($_POST["Message"])){
-          $message=$_POST["Message"];
-        }
-        $body="Nuova richiesta di contatto: \n Nome: ".$name."\n Email:".$email;
-        if($message!=""){
-          $body.="\n Messaggio:".$message;
-        }
-        if($phone!=""){
-          $body.="\n Numero di telefono:".$phone;
-        }
-        mail(
-          "veronicacurro.beautyconsultant@gmail.com",
-          'Nuova richiesta di contatto',
-          $body,
-          "From: veronicacurr0"
-        );
-        echo '<script type="text/javascript">alert("Grazie dell\'interesse, ti risponderò appena possibile!");</script>';
-      }
-     ?>
+
+     
       <div class="container-fluid site-wrapper">
          <!-- this is the Sheet -->
          <div class="dynamicHeaderContainer HeaderType6 top-container">
@@ -1158,7 +1160,7 @@
                                        <div class="outer-margin-on  last">
                                           <div class="section contact-section margins-on">
                                              <div class="content" data-ss="contactsection">
-                                               <form action="index.php" method="POST">
+                                               <form onsubmit="submitData();return false;">
                                                   <div class="row-fluid">
                                                      <div class="span12 cf-preview-label">
                                                         Nome*
@@ -1166,7 +1168,7 @@
                                                   </div>
                                                   <div class="row-fluid">
                                                      <div class="span12">
-                                                        <input type="text" name="Name"/>
+                                                        <input type="text" name="Name" id="Name"/>
                                                      </div>
                                                   </div>
                                                   <div class="row-fluid">
@@ -1176,7 +1178,7 @@
                                                   </div>
                                                   <div class="row-fluid">
                                                      <div class="span12">
-                                                        <input type="text" name="Email"/>
+                                                        <input type="text" name="Email" id="Email"/>
                                                      </div>
                                                   </div>
                                                   <div class="row-fluid">
@@ -1186,7 +1188,7 @@
                                                   </div>
                                                   <div class="row-fluid">
                                                      <div class="span12">
-                                                        <input type="text" name="Phone"/>
+                                                        <input type="text" name="Phone" id="Phone"/>
                                                      </div>
                                                   </div>
                                                   <div class="row-fluid">
@@ -1196,7 +1198,7 @@
                                                   </div>
                                                   <div class="row-fluid">
                                                      <div class="span12">
-                                                        <textarea rows="5" name="Message"></textarea>
+                                                        <textarea rows="5" name="Message" id="Message"></textarea>
                                                      </div>
                                                   </div>
                                                   <div class="row-fluid">
